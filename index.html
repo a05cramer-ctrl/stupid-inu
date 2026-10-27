@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stupid Inu</title>
+<meta name="description" content="The term Artificial Intelligence has been banned. Meet SI. $SI">
+<meta property="og:title" content="Stupid Inu — SI">
+<meta property="og:description" content="Super Intelligence has a little brother. He is not smart. $SI">
+<meta property="og:image" content="assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/pfp.png">
+<link rel="apple-touch-icon" href="assets/pfp.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f5f1; --paper:#ffffff; --ink:#111214; --mute:#6b6e75; --line:#e3e1da;
+    --blue:#1f4bff; --blue-soft:#e9edff; --red:#e0352b; --green:#1a9a4a;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+  [hidden]{display:none!important}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  .serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+  .mono{font-family:"DM Mono",ui-monospace,monospace}
+  .wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
+
+  /* top bar */
+  .top{position:sticky;top:0;z-index:20;background:rgba(246,245,241,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .mark{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:18px}
+  .mark .si{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--ink);color:#fff;font-weight:800;font-size:14px;letter-spacing:0}
+  .nav{display:flex;gap:26px;font-size:14px;color:var(--mute);font-weight:600}
+  .nav a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid var(--ink);transition:transform .15s,background .15s,color .15s}
+  .btn.primary{background:var(--ink);color:#fff}
+  .btn.primary:hover{background:var(--blue);border-color:var(--blue);transform:translateY(-1px)}
+  .btn.ghost:hover{background:var(--ink);color:#fff}
+
+  /* banner strip */
+  .strip{background:var(--ink);color:#fff;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;overflow:hidden;white-space:nowrap}
+  .strip .in{display:inline-block;padding:9px 0;animation:marq 38s linear infinite}
+  .strip span{margin:0 28px;opacity:.9}
+  .strip b{color:#ffd166;font-weight:700}
+  @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* hero */
+  .hero{padding:72px 0 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:700;margin-bottom:22px}
+  .eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block;animation:blink 1.6s infinite}
+  @keyframes blink{50%{opacity:.25}}
+  h1{font-size:clamp(52px,7.4vw,104px);line-height:.95;letter-spacing:-.035em;font-weight:800}
+  h1 em{font-style:italic;font-weight:400;font-family:"Instrument Serif",serif;letter-spacing:-.02em}
+  .lede{margin-top:22px;font-size:clamp(17px,1.5vw,21px);line-height:1.45;color:#34363c;max-width:52ch}
+  .lede b{color:var(--ink)}
+  .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;align-items:center}
+  .ca{display:inline-flex;align-items:center;gap:10px;padding:10px 12px 10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);font-size:13px;max-width:100%}
+  .ca .k{font-size:11px;letter-spacing:.16em;color:var(--mute);font-weight:700}
+  .ca .v{font-family:"DM Mono",monospace;max-width:min(300px,52vw);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ca .cp{font-size:11px;letter-spacing:.12em;font-weight:700;color:var(--blue)}
+  .stat-row{display:flex;gap:26px;margin-top:30px;padding-top:22px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .stat b{display:block;font-size:26px;letter-spacing:-.03em;font-weight:800}
+  .stat span{font-size:12px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+
+  .stage{position:relative;aspect-ratio:1/1.08;border-radius:28px;background:
+    radial-gradient(120% 90% at 50% 100%,#dfe3ef 0%,#f0f1f5 55%,#fafaf8 100%);border:1px solid var(--line);overflow:hidden;isolation:isolate}
+  .stage::before{content:"";position:absolute;inset:0;background:
+    repeating-linear-gradient(0deg,transparent 0 39px,rgba(17,18,20,.045) 39px 40px),repeating-linear-gradient(90deg,transparent 0 39px,rgba(17,18,20,.045) 39px 40px);mask:linear-gradient(#000 40%,transparent 95%)}
+  .stage .floor{position:absolute;left:8%;right:8%;bottom:9%;height:22px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.28),transparent 70%);filter:blur(4px)}
+  .dog{position:absolute;left:50%;bottom:9.5%;width:66%;transform:translateX(-50%);transform-origin:50% 100%;will-change:transform;filter:drop-shadow(0 18px 24px rgba(0,0,0,.18));animation:bob 3.4s ease-in-out infinite}
+  .dog img{width:100%;display:block;pointer-events:none;user-select:none}
+  @keyframes bob{0%,100%{transform:translateX(-50%) rotate(-1.2deg) translateY(0)}50%{transform:translateX(-50%) rotate(1.2deg) translateY(-6px)}}
+  .drool{position:absolute;left:calc(50% + 2.5%);bottom:9.5%;height:46%;width:4%;transform-origin:50% 0;pointer-events:none}
+  .drool svg{width:100%;height:100%;overflow:visible}
+  .tag{position:absolute;padding:8px 12px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:700;letter-spacing:.04em;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+  .tag.t1{top:20px;left:20px}
+  .tag.t2{top:20px;right:20px;color:var(--red)}
+  .tag.t3{bottom:20px;left:20px;font-family:"DM Mono",monospace;font-weight:500}
+  .tag.t4{bottom:20px;right:20px}
+  .puddle{position:absolute;left:26%;bottom:6%;width:40%;pointer-events:none}
+  .puddle svg{width:100%;display:block}
+  .puddle span{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font:600 11px/1 'DM Mono',monospace;letter-spacing:.06em;color:#8a7a2a;white-space:nowrap}
+  .puddle[hidden]{display:none}
+  .tag.t5{left:50%;top:50%;transform:translate(-50%,-50%);color:var(--mute);font-weight:600}
+  .tag .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:7px;vertical-align:1px}
+
+  /* sections */
+  section{padding:70px 0}
+  .sec-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+  h2{font-size:clamp(34px,4.2vw,56px);letter-spacing:-.03em;line-height:1;font-weight:800}
+  h2 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400}
+  .sub{color:var(--mute);font-size:15px;max-width:48ch;line-height:1.5}
+
+  /* benchmarks */
+  .table{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .table th,.table td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+  .table tr:last-child td{border-bottom:0}
+  .table th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:700;background:#fafaf7}
+  .table td:first-child{font-weight:700;width:26%}
+  .table td.ok{color:var(--green);font-weight:700}
+  .table td.si{color:var(--red);font-weight:700}
+  .table td small{display:block;color:var(--mute);font-weight:400;font-size:13px;margin-top:3px}
+
+  /* model card */
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:700}
+  .card .v{font-size:30px;font-weight:800;letter-spacing:-.03em;margin-top:8px;line-height:1}
+  .card .d{font-size:13px;color:var(--mute);margin-top:8px;line-height:1.4}
+
+  /* quote band */
+  .band{background:var(--ink);color:#fff;border-radius:28px;padding:56px 48px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+  .band .q{font-family:"Instrument Serif",serif;font-size:clamp(28px,3.6vw,46px);line-height:1.1;letter-spacing:-.02em}
+  .band .who{margin-top:16px;color:#b8bcc8;font-size:14px}
+  .band .pic{aspect-ratio:1;border-radius:20px;background:url(assets/pfp.png) center/cover;border:1px solid rgba(255,255,255,.15)}
+
+
+  /* the pet */
+  #pet{position:fixed;left:0;bottom:0;z-index:40;width:165px;transform-origin:50% 100%;will-change:transform;pointer-events:auto;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none}
+  #pet .body{position:relative;width:100%;transform-origin:50% 100%}
+  #pet img{width:100%;display:block;pointer-events:none;position:absolute;left:0;bottom:0;opacity:0;transition:opacity .08s}
+  #pet img.on{opacity:1;position:relative}
+  #pet.flip .body{transform:scaleX(-1)}
+  #pet.walk .body{animation:waddle .42s ease-in-out infinite}
+  #pet.flip.walk .body{animation:waddleF .42s ease-in-out infinite}
+  @keyframes waddle{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(5deg) translateY(-7px)}}
+  @keyframes waddleF{0%,100%{transform:scaleX(-1) rotate(5deg) translateY(0)}50%{transform:scaleX(-1) rotate(-5deg) translateY(-7px)}}
+  #pet.jerk .body{animation:jerk .11s linear infinite}
+  #pet.flip.jerk .body{animation:jerkF .11s linear infinite}
+  @keyframes jerk{0%,100%{transform:translateX(-3px) rotate(-2deg)}50%{transform:translateX(3px) rotate(2deg)}}
+  @keyframes jerkF{0%,100%{transform:scaleX(-1) translateX(-3px) rotate(-2deg)}50%{transform:scaleX(-1) translateX(3px) rotate(2deg)}}
+  #pet.shake .body{animation:shake .08s linear infinite}
+  @keyframes shake{0%,100%{transform:translate(-2px,0)}50%{transform:translate(2px,-1px)}}
+  #pet.sleep .body{transform:rotate(90deg) translateX(-50%);transition:transform .5s}
+  #pet.flip.sleep .body{transform:scaleX(-1) rotate(90deg) translateX(-50%)}
+  #pet .sweat{position:absolute;top:18%;left:50%;font-size:22px;opacity:0;pointer-events:none}
+  #pet.jerk .sweat{opacity:1;animation:sweat .5s ease-in infinite}
+  @keyframes sweat{0%{transform:translate(-50%,0);opacity:1}100%{transform:translate(-50%,60px);opacity:0}}
+  #pet .cens{position:absolute;left:50%;top:50%;margin-left:-34px;background:#111;color:#fff;font:700 10px/1 'DM Mono',monospace;letter-spacing:.12em;padding:6px 7px;opacity:0;pointer-events:none;transform:rotate(-8deg)}
+  #pet.jerk .cens{opacity:1;animation:cens .22s steps(2) infinite}
+  @keyframes cens{0%{transform:rotate(-8deg) translate(0,0)}100%{transform:rotate(-8deg) translate(2px,-2px)}}
+  #pet .zz{position:absolute;top:-10px;right:-6px;font-size:20px;font-weight:800;opacity:0;pointer-events:none;font-family:"DM Mono",monospace}
+  #pet.sleep .zz{opacity:1;animation:zz 1.6s ease-in-out infinite}
+  @keyframes zz{0%{transform:translateY(0);opacity:0}30%{opacity:1}100%{transform:translateY(-28px);opacity:0}}
+  #say{position:fixed;z-index:41;background:#fff;color:#111;border:2px solid #111;border-radius:14px;padding:10px 14px;font-weight:800;font-size:15px;max-width:230px;line-height:1.25;pointer-events:none;opacity:0;transform:translate(-50%,-110%) scale(.9);transition:opacity .15s,transform .15s;box-shadow:4px 4px 0 #111}
+  #say.on{opacity:1;transform:translate(-50%,-110%) scale(1)}
+  #say.big{font-size:22px;background:var(--red);color:#fff;border-color:#111}
+  #say::after{content:"";position:absolute;left:50%;bottom:-9px;width:12px;height:12px;background:inherit;border-right:2px solid #111;border-bottom:2px solid #111;transform:translateX(-50%) rotate(45deg)}
+  @media (max-width:640px){ #pet{width:110px} #say{font-size:14px;max-width:190px} }
+
+  footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--mute);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+  .foot-links{display:flex;gap:18px}
+
+  #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;font-weight:700;opacity:0;transition:opacity .25s;pointer-events:none;z-index:50}
+  #toast.on{opacity:1}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;padding-top:44px}
+    .stage{aspect-ratio:1/1;order:-1}
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .band{grid-template-columns:1fr;padding:34px 24px}
+    .band .pic{max-width:220px}
+    .nav{display:none}
+  }
+  @media (max-width:520px){
+    .wrap{width:calc(100% - 32px)}
+    .cards{grid-template-columns:1fr}
+    .log{height:360px}
+    .msg{max-width:88%}
+    .stat-row{gap:18px}
+    .table th,.table td{padding:12px 12px;font-size:14px}
+  }
+  @media (prefers-reduced-motion:reduce){ .dog,.strip .in,.eyebrow i{animation:none} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top"><span class="si">SI</span>Stupid Inu</a>
+    <nav class="nav"><a href="#bench">Benchmarks</a><a href="#model">Model card</a><a id="navx" href="#" target="_blank" rel="noopener">X</a></nav>
+    <a class="btn primary" id="buyTop" href="#" target="_blank" rel="noopener">Buy $SI</a>
+  </div>
+</header>
+
+<div class="strip"><div class="in" id="strip"></div></div>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow"><i></i> Official notice · the term "artificial intelligence" is banned</div>
+      <h1>Stupid<br><em>Intelligence.</em></h1>
+      <p class="lede">Super Intelligence has a little brother. He is not super. He is not intelligent. He is <b>SI</b>, and he is drooling on the keyboard as you read this.</p>
+      <div class="cta">
+        <a class="btn primary" id="buy" href="#" target="_blank" rel="noopener">Buy $SI on pump.fun</a>
+        <a class="btn ghost" id="chart" href="#" target="_blank" rel="noopener">Chart</a>
+        <a class="btn ghost" id="xlink" href="#" target="_blank" rel="noopener">X</a>
+      </div>
+      <div class="cta"><button class="ca" id="ca"><span class="k">CA</span><span class="v" id="caV">soon</span><span class="cp" id="caC"></span></button></div>
+      <div class="stat-row">
+        <div class="stat"><b>3</b><span>IQ (est.)</span></div>
+        <div class="stat"><b>0</b><span>Questions answered right</span></div>
+        <div class="stat"><b>1</b><span>Tooth</span></div>
+        <div class="stat"><b>∞</b><span>Drool</span></div>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="floor"></div>
+      <div class="dog" id="dog"><img src="assets/dog.png" alt="Stupid Inu"></div>
+      <div class="drool" id="drool"><svg viewBox="0 0 20 200" preserveAspectRatio="none"><path id="droolPath" d="M10 0 C 10 60, 4 100, 10 200" fill="none" stroke="rgba(170,200,230,.85)" stroke-width="5" stroke-linecap="round"/><circle id="drop" cx="10" cy="200" r="5" fill="rgba(170,200,230,.9)"/></svg></div>
+      <div class="tag t1">SI-1 · stupid</div>
+      <div class="tag t2">NOT SUPER</div>
+      <div class="tag t3" id="uptime">awake 0:00</div>
+      <div class="tag t4" id="t4"><span class="dot"></span>drooling</div>
+      <div class="tag t5" id="left" hidden>he left. look down.</div>
+      <div class="puddle" id="puddle" hidden><svg viewBox="0 0 220 70"><path d="M20 40 C 30 10, 90 5, 120 22 C 150 8, 205 15, 200 40 C 195 62, 140 68, 100 58 C 60 70, 15 62, 20 40 Z" fill="rgba(240,205,60,.55)"/></svg><span>he pissed here</span></div>
+    </div>
+  </div>
+
+  <section id="bench">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Benchmarks.</h2>
+        <p class="sub">Independently evaluated by a guy who watched him for ten minutes.</p>
+      </div>
+      <table class="table">
+        <thead><tr><th>Task</th><th>Super Intelligence</th><th>Stupid Intelligence</th></tr></thead>
+        <tbody>
+          <tr><td>Math</td><td class="ok">Passes</td><td class="si">"ball"<small>answer given to every question</small></td></tr>
+          <tr><td>Reasoning</td><td class="ok">Passes</td><td class="si">Drooled<small>test paper unreadable</small></td></tr>
+          <tr><td>Chess</td><td class="ok">Grandmaster</td><td class="si">Ate the knight<small>then the bishop</small></td></tr>
+          <tr><td>Reading</td><td class="ok">Every language</td><td class="si">Stared at the page<small>upside down, for an hour</small></td></tr>
+          <tr><td>Memory</td><td class="ok">Everything</td><td class="si">4 seconds<small>forgot the test mid test</small></td></tr>
+          <tr><td>Flying</td><td class="ok">Yes, with cape</td><td class="si">Fell off the couch<small>twice</small></td></tr>
+          <tr><td>Being a good boy</td><td class="si">Unknown</td><td class="ok">Yes<small>the only one he passes</small></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="model">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Model <em>card.</em></h2>
+        <p class="sub">Published for transparency. He asked us not to.</p>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="l">Parameters</div><div class="v">3</div><div class="d">food, ball, ???</div></div>
+        <div class="card"><div class="l">Context window</div><div class="v">4 s</div><div class="d">then he forgets what you said and why he's here</div></div>
+        <div class="card"><div class="l">Training data</div><div class="v">1 ball</div><div class="d">it rolled under the couch in 2019. he's still thinking about it</div></div>
+        <div class="card"><div class="l">Safety</div><div class="v">Drools</div><div class="d">on the keyboard, the floor, you. he has never hurt anyone. he can't reach</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <div class="q">"We will be officially banning the term. From now on it is SI."<br><span style="opacity:.7">He heard that and thought they meant him.</span></div>
+          <div class="who">Stupid Inu · the little brother · $SI</div>
+        </div>
+        <div class="pic"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Stupid Inu · $SI · no utility, no roadmap, no idea</div>
+    <div class="foot-links"><a id="fbuy" href="#" target="_blank" rel="noopener">Buy</a><a id="fchart" href="#" target="_blank" rel="noopener">Chart</a><a id="fx" href="#" target="_blank" rel="noopener">X</a></div>
+  </div>
+</footer>
+<div id="pet">
+  <div class="body">
+    <img class="on" data-pose="idle" src="assets/dog-idle.webp" alt="">
+    <img data-pose="point" src="assets/dog-point.webp" alt="">
+    <img data-pose="finger" src="assets/dog-finger.webp" alt="">
+    <img data-pose="guilty" src="assets/dog-guilty.webp" alt="">
+  </div>
+  <div class="sweat">💦</div><div class="zz">z</div><div class="cens">CENSORED</div>
+</div>
+<div id="say"></div>
+<div id="toast">copied</div>
+
+<script src="config.js"></script>
+<script>
+(() => {
+  const C = window.SI_CFG || {};
+  const $ = (s) => document.querySelector(s);
+  const ca = (C.CA || '').trim();
+  const buy = C.BUY || (ca ? `https://pump.fun/coin/${ca}` : '');
+  const chart = C.CHART || (ca ? `https://gmgn.ai/sol/token/${ca}` : '');
+  const x = C.X || '';
+  const link = (id, href) => { const el = $(id); if (!el) return; if (href) { el.href = href; el.hidden = false; } else el.hidden = true; };
+  link('#buy', buy); link('#buyTop', buy); link('#fbuy', buy); link('#chart', chart); link('#fchart', chart); link('#xlink', x); link('#fx', x); link('#navx', x);
+  $('#caV').textContent = ca || 'soon'; $('#caC').textContent = ca ? 'COPY' : '';
+  let toastT; const toast = (s) => { const t = $('#toast'); t.textContent = s; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 1400); };
+  $('#ca').addEventListener('click', async () => { if (!ca) return toast('ca drops at launch'); try { await navigator.clipboard.writeText(ca); toast('copied'); } catch { toast(ca); } });
+
+  // marquee
+  const items = ['the term "artificial intelligence" is banned', 'SI is the official replacement', 'he does not know what SI stands for', 'IQ: 3', 'super intelligence has a little brother', 'he is not super', 'he drooled on the keyboard', '$SI'];
+  const strip = $('#strip'); strip.innerHTML = (items.concat(items)).map((s, i) => `<span>${i % 4 === 3 ? '<b>' + s + '</b>' : s}</span>`).join('');
+
+  // uptime
+  const t0 = Date.now();
+  setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); $('#uptime').textContent = `awake ${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; }, 1000);
+
+  // dog follows the cursor with his whole stupid head (tilt), drool swings
+  const dog = $('#dog'), stage = $('#stage'), path = $('#droolPath'), drop = $('#drop');
+  let tx = 0, ty = 0, cx = 0, cy = 0;
+  addEventListener('pointermove', (e) => { const r = stage.getBoundingClientRect(); tx = ((e.clientX - (r.left + r.width / 2)) / r.width) * 2; ty = ((e.clientY - (r.top + r.height / 2)) / r.height) * 2; });
+  let droolLen = 1, droolT = 0;
+  (function loop() {
+    requestAnimationFrame(loop);
+    cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06;
+    dog.style.transform = `translateX(-50%) rotate(${cx * 4}deg) skewX(${cx * -2}deg) translateY(${cy * -6}px)`;
+    droolT += 0.016;
+    droolLen = 0.55 + 0.45 * Math.abs(Math.sin(droolT * 0.35));           // string grows, drops, grows
+    const sway = Math.sin(droolT * 1.3) * 6 + cx * 10;
+    const L = 200 * droolLen;
+    path.setAttribute('d', `M10 0 C ${10 + sway * .4} ${L * .35}, ${10 + sway} ${L * .7}, ${10 + sway * .6} ${L}`);
+    drop.setAttribute('cx', 10 + sway * .6); drop.setAttribute('cy', L); drop.setAttribute('r', 3.5 + 3 * droolLen);
+  })();
+
+
+  // ---- the pet: he walks around the page and is an asshole ----
+  const pet = $('#pet'), say = $('#say'), stageDog = $('#dog');
+  const poses = [...pet.querySelectorAll('img')];
+  const pose = (n) => poses.forEach((i) => i.classList.toggle('on', i.dataset.pose === n));
+  const W = () => innerWidth, PW = () => pet.offsetWidth;
+  const P = { x: 0, y: 0, tx: 0, dir: -1, state: 'idle', until: 0, sayT: 0, mouse: { x: -999, y: -999 }, lastMouse: 0, annoyed: 0 };
+  const LINES = {
+    walk: ['i\'m walking here', 'dont scroll. i\'m working', 'where is the ball', 'i live here now', 'this page is mine', 'brb', 'looking for the ca', 'my brother has a website too. its worse'],
+    stare: ['what', 'what are you looking at', 'you sold didnt you', 'i can see your wallet', 'blink and i bite'],
+    point: ['you.', 'you. yes you.', 'i know what you did', 'you sold the dip', 'you\'re the jeet', 'you have 0.04 sol. i can smell it', 'sir this is a government page', 'YOU.', 'paper hands. i can tell', 'you clicked buy and then cried'],
+    finger: ['fuck off', 'fuck off i\'m official', 'go buy something', 'my brother does meetings. i do this', 'i\'d say hi but no', 'this one is for the devs', 'certified by the government'],
+    jerk: ['shh. busy.', 'dont look', '5 more minutes', 'i\'m thinking', 'its for the benchmarks', 'this is my job now', 'reading the whitepaper', 'computing'],
+    caught: ['FUCK OFF', 'I SAID FUCK OFF', 'DONT TOUCH ME', 'GET OUT', 'I\'M WORKING'],
+    sleep: ['zzz', 'z', 'ball…'],
+    click: ['fuck off', 'ow', 'dont', 'FUCK OFF', 'i\'m telling my brother', 'no touching the intelligence'],
+    scroll: ['wait', 'slow down', 'i get carsick', 'WAIT'],
+  };
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  const speak = (t, big) => { say.textContent = t; say.classList.toggle('big', !!big); say.classList.add('on'); clearTimeout(P.sayT); P.sayT = setTimeout(() => say.classList.remove('on'), big ? 1400 : 2000); };
+  const placeSay = () => { say.style.left = (P.x + PW() / 2) + 'px'; say.style.top = (innerHeight - pet.offsetHeight + 6) + 'px'; };
+  const face = (dir) => { P.dir = dir; pet.classList.toggle('flip', dir < 0); };   // images face right by default; flip to face left
+  const faceMouse = () => face(P.mouse.x > P.x + PW() / 2 ? 1 : -1);
+  const setState = (st, ms) => {
+    P.state = st; P.until = performance.now() + ms;
+    pet.className = (P.dir < 0 ? 'flip ' : '') + ({ walk: 'walk', jerk: 'jerk', caught: 'shake', sleep: 'sleep' }[st] || '');
+    pose({ point: 'point', finger: 'finger', jerk: 'guilty', caught: 'finger' }[st] || 'idle');
+  };
+  function decide() {
+    const r = Math.random();
+    if (r < 0.30) { P.tx = Math.max(0, Math.random() * (W() - PW())); face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); if (Math.random() < .4) speak(pick(LINES.walk)); }
+    else if (r < 0.34) { P.leave = true; P.tx = P.x < W() / 2 ? -PW() - 10 : W() + 10; face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); speak('brb'); }
+    else if (r < 0.50) { faceMouse(); setState('stare', 1800 + Math.random() * 1500); speak(pick(LINES.stare)); }
+    else if (r < 0.66) { faceMouse(); setState('point', 2200 + Math.random() * 1200); speak(pick(LINES.point)); }
+    else if (r < 0.80) { faceMouse(); setState('finger', 2000 + Math.random() * 1200); speak(pick(LINES.finger)); }
+    else if (r < 0.93) { face(P.x < W() / 2 ? -1 : 1); setState('jerk', 3500 + Math.random() * 3000); speak(pick(LINES.jerk)); }
+    else { setState('sleep', 4000 + Math.random() * 4000); speak(pick(LINES.sleep)); }
+  }
+  // boot: he is in the stage; after a beat he "leaves" and the wandering begins
+  let petOn = false;
+  function release() {
+    if (petOn) return; petOn = true;
+    const r = stageDog.getBoundingClientRect();
+    stageDog.style.visibility = 'hidden'; $('#drool').style.visibility = 'hidden'; $('#t4').hidden = true; $('#left').hidden = false; setTimeout(() => { $('#puddle').hidden = false; }, 1500);
+    P.x = Math.min(Math.max(0, r.left + r.width / 2 - PW() / 2), W() - PW()); pet.style.display = 'block';
+    face(-1); setState('stare', 900); speak('bye.');
+    setTimeout(() => { P.tx = Math.max(0, P.x - 300 - Math.random() * 300); face(-1); setState('walk', 1e9); }, 900);
+  }
+  pet.style.display = 'none';
+  setTimeout(release, 2600);
+  // reactions
+  addEventListener('pointermove', (e) => { P.mouse = { x: e.clientX, y: e.clientY }; P.lastMouse = performance.now(); });
+  pet.addEventListener('pointerdown', (e) => {
+    e.preventDefault(); P.annoyed++;
+    speak(pick(LINES.click), P.annoyed > 2); faceMouse();
+    if (P.state === 'jerk') { setState('caught', 1200); speak(pick(LINES.caught), true); return; }
+    // run away from the cursor
+    const away = (P.mouse.x > P.x + PW() / 2) ? -1 : 1; P.tx = Math.max(0, Math.min(W() - PW(), P.x + away * (260 + Math.random() * 260)));
+    face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); P.speed = 6;
+  });
+  let lastY = scrollY, scrollT;
+  addEventListener('scroll', () => { const dy = scrollY - lastY; lastY = scrollY; if (Math.abs(dy) > 40 && P.state !== 'walk') { clearTimeout(scrollT); scrollT = setTimeout(() => { if (Math.random() < .5) speak(pick(LINES.scroll)); }, 120); } }, { passive: true });
+  // loop
+  let lastT = performance.now();
+  (function tick(now) {
+    requestAnimationFrame(tick);
+    const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+    if (!petOn) return;
+    const near = Math.hypot(P.mouse.x - (P.x + PW() / 2), P.mouse.y - (innerHeight - pet.offsetHeight / 2)) < 170 && now - P.lastMouse < 2500;
+    if (P.state === 'jerk' && near) { setState('caught', 1300); speak(pick(LINES.caught), true); }
+    if (P.state === 'walk' && near && !P.leave && Math.random() < 0.012 && now - (P.lastFlip || 0) > 5000) { P.lastFlip = now; const tx = P.tx; faceMouse(); setState('finger', 1100); speak('fuck off'); P.resume = tx; }
+    if (P.state === 'walk') {
+      const sp = (P.speed || 2.6) * 60 * dt;
+      if (Math.abs(P.tx - P.x) <= sp) {
+        P.x = P.tx; P.speed = 0;
+        if (P.leave) { P.leave = false; const fromLeft = P.x < 0; P.x = fromLeft ? W() + 10 : -PW() - 10; P.tx = fromLeft ? W() - PW() - 40 : 40; face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); setTimeout(() => speak(pick(['back', 'i was outside', 'i forgot what i was doing'])), 1200); }
+        else decide();
+      }
+      else P.x += Math.sign(P.tx - P.x) * sp;
+    } else if (now > P.until) { if (P.resume != null) { P.tx = P.resume; P.resume = null; face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); } else decide(); }
+    if (P.state === 'stare' || P.state === 'point' || P.state === 'finger') { faceMouse(); }
+    if (!P.leave && !(P.state === 'walk' && (P.x < 0 || P.x > W() - PW()))) P.x = Math.max(0, Math.min(W() - PW(), P.x));
+    pet.style.transform = `translateX(${P.x}px)`;
+    placeSay();
+  })(performance.now());
+  addEventListener('resize', () => { P.x = Math.min(P.x, W() - PW()); });
+})();
+</script>
+</body>
+</html>
