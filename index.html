@@ -126,10 +126,10 @@
   #pet img{width:100%;display:block;pointer-events:none;position:absolute;left:0;bottom:0;opacity:0;transition:opacity .08s}
   #pet img.on{opacity:1;position:relative}
   #pet.flip .body{transform:scaleX(-1)}
-  #pet.walk .body{animation:waddle .42s ease-in-out infinite}
-  #pet.flip.walk .body{animation:waddleF .42s ease-in-out infinite}
-  @keyframes waddle{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(5deg) translateY(-7px)}}
-  @keyframes waddleF{0%,100%{transform:scaleX(-1) rotate(5deg) translateY(0)}50%{transform:scaleX(-1) rotate(-5deg) translateY(-7px)}}
+  #pet.walk .body{animation:waddle .32s ease-in-out infinite}
+  #pet.flip.walk .body{animation:waddleF .32s ease-in-out infinite}
+  @keyframes waddle{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-5px)}}
+  @keyframes waddleF{0%,100%{transform:scaleX(-1) rotate(3deg) translateY(0)}50%{transform:scaleX(-1) rotate(-3deg) translateY(-5px)}}
   #pet.jerk .body{animation:jerk .11s linear infinite}
   #pet.flip.jerk .body{animation:jerkF .11s linear infinite}
   @keyframes jerk{0%,100%{transform:translateX(-3px) rotate(-2deg)}50%{transform:translateX(3px) rotate(2deg)}}
@@ -149,9 +149,43 @@
   @keyframes zz{0%{transform:translateY(0);opacity:0}30%{opacity:1}100%{transform:translateY(-28px);opacity:0}}
   #say{position:fixed;z-index:41;background:#fff;color:#111;border:2px solid #111;border-radius:14px;padding:10px 14px;font-weight:800;font-size:15px;max-width:230px;line-height:1.25;pointer-events:none;opacity:0;transform:translate(-50%,-110%) scale(.9);transition:opacity .15s,transform .15s;box-shadow:4px 4px 0 #111}
   #say.on{opacity:1;transform:translate(-50%,-110%) scale(1)}
-  #say.big{font-size:22px;background:var(--red);color:#fff;border-color:#111}
   #say::after{content:"";position:absolute;left:50%;bottom:-9px;width:12px;height:12px;background:inherit;border-right:2px solid #111;border-bottom:2px solid #111;transform:translateX(-50%) rotate(45deg)}
-  @media (max-width:640px){ #pet{width:110px} #say{font-size:14px;max-width:190px} }
+  @media (max-width:640px){ #pet{width:110px} #say{font-size:14px;max-width:190px} #say.big{font-size:19px} .poster{top:40%;max-width:200px;padding:14px 12px 12px} .poster .ph{font-size:28px} .puddle{bottom:3%} }
+
+  /* polish-1: motion */
+  .rv{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  tr.rv{transform:translateX(-10px)} tr.rv.in{transform:none}
+  .table td.si .t{white-space:pre}
+  .poster{position:absolute;left:50%;top:44%;width:52%;max-width:250px;transform:translate(-50%,-50%) rotate(-4deg);background:#fff;color:#111;border:1px solid #ddd;box-shadow:0 18px 40px rgba(0,0,0,.14);padding:18px 16px 14px;text-align:center;font-family:"DM Mono",monospace;animation:posterIn .55s cubic-bezier(.2,1.4,.4,1) both}
+  .poster[hidden]{display:none}
+  .poster .tape{position:absolute;left:50%;top:-11px;width:84px;height:22px;background:rgba(250,230,120,.75);transform:translateX(-50%) rotate(2deg);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .poster .ph{font:900 34px/1 Manrope,sans-serif;letter-spacing:-.02em;margin-bottom:10px}
+  .poster .pimg{width:56%;aspect-ratio:1;margin:0 auto 10px;border:1px solid #ccc;overflow:hidden;filter:grayscale(1) contrast(1.15)}
+  .poster .pimg img{width:140%;max-width:none;margin:-8% 0 0 -20%;display:block}
+  .poster .pn{font-weight:700;font-size:12px;margin-bottom:6px}
+  .poster .pd{font-size:10.5px;line-height:1.45;color:#444}
+  .poster .pr{margin-top:10px;font:800 12px/1 Manrope,sans-serif;letter-spacing:.12em;color:var(--red)}
+  @keyframes posterIn{from{opacity:0;transform:translate(-50%,-60%) rotate(-10deg) scale(.8)}to{opacity:1;transform:translate(-50%,-50%) rotate(-4deg) scale(1)}}
+  #pet.stand .body{animation:breathe 2.4s ease-in-out infinite}
+  #pet.flip.stand .body{animation:breatheF 2.4s ease-in-out infinite}
+  @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.025) scaleX(.99)}}
+  @keyframes breatheF{0%,100%{transform:scaleX(-1) scaleY(1)}50%{transform:scaleX(-.99) scaleY(1.025)}}
+  #pet.tumble .body{transform-origin:50% 50%;animation:tumble .9s cubic-bezier(.3,.1,.3,1) 1}
+  #pet.flip.tumble .body{transform-origin:50% 50%;animation:tumbleF .9s cubic-bezier(.3,.1,.3,1) 1}
+  @keyframes tumble{0%{transform:translateY(0) rotate(0)}40%{transform:translateY(-70px) rotate(-200deg)}100%{transform:translateY(0) rotate(-360deg)}}
+  @keyframes tumbleF{0%{transform:translateY(0) scaleX(-1) rotate(0)}40%{transform:translateY(-70px) scaleX(-1) rotate(-200deg)}100%{transform:translateY(0) scaleX(-1) rotate(-360deg)}}
+  #pet.squash .body{animation:squash .42s cubic-bezier(.2,1.6,.4,1) 1}
+  #pet.flip.squash .body{animation:squashF .42s cubic-bezier(.2,1.6,.4,1) 1}
+  @keyframes squash{0%{transform:scale(1.25,.7)}60%{transform:scale(.94,1.08)}100%{transform:scale(1,1)}}
+  @keyframes squashF{0%{transform:scale(-1.25,.7)}60%{transform:scale(-.94,1.08)}100%{transform:scale(-1,1)}}
+  @keyframes pop{0%{opacity:0;transform:translate(-50%,-100%) scale(.5)}60%{opacity:1;transform:translate(-50%,-112%) scale(1.08)}100%{opacity:1;transform:translate(-50%,-110%) scale(1)}}
+  #say.on{animation:pop .28s cubic-bezier(.2,1.4,.4,1) both}
+  #say.big{font-size:24px;background:var(--red);color:#fff;border-color:#111;transform:rotate(-3deg);padding:12px 16px;letter-spacing:-.01em;box-shadow:5px 5px 0 #111}
+  #say.big.on{animation:popBig .3s cubic-bezier(.2,1.6,.4,1) both,shout .12s linear .3s infinite}
+  @keyframes popBig{0%{opacity:0;transform:translate(-50%,-100%) rotate(-3deg) scale(.4)}100%{opacity:1;transform:translate(-50%,-110%) rotate(-3deg) scale(1)}}
+  @keyframes shout{0%,100%{transform:translate(-50%,-110%) rotate(-3deg) translateX(-1px)}50%{transform:translate(-50%,-110%) rotate(-3deg) translateX(1px)}}
+  @media (prefers-reduced-motion:reduce){ .rv{opacity:1;transform:none;transition:none} #pet .body{animation:none!important} }
 
   footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--mute);font-size:13px}
   footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
@@ -204,7 +238,7 @@
       </div>
       <div class="cta"><button class="ca" id="ca"><span class="k">CA</span><span class="v" id="caV">soon</span><span class="cp" id="caC"></span></button></div>
       <div class="stat-row">
-        <div class="stat"><b>3</b><span>IQ (est.)</span></div>
+        <div class="stat"><b id="iq">160</b><span>IQ (est.)</span></div>
         <div class="stat"><b>0</b><span>Questions answered right</span></div>
         <div class="stat"><b>1</b><span>Tooth</span></div>
         <div class="stat"><b>∞</b><span>Drool</span></div>
@@ -218,27 +252,34 @@
       <div class="tag t2">NOT SUPER</div>
       <div class="tag t3" id="uptime">awake 0:00</div>
       <div class="tag t4" id="t4"><span class="dot"></span>drooling</div>
-      <div class="tag t5" id="left" hidden>he left. look down.</div>
+      <div class="poster" id="poster" hidden>
+        <i class="tape"></i>
+        <div class="ph">MISSING</div>
+        <div class="pimg"><img src="assets/pfp.png" alt=""></div>
+        <div class="pn">SI-1 · "stupid inu"</div>
+        <div class="pd">answers to: ball<br>last seen: bottom of your screen<br>do not approach. he will flip you off</div>
+        <div class="pr">REWARD: 1 BALL</div>
+      </div>
       <div class="puddle" id="puddle" hidden><svg viewBox="0 0 220 70"><path d="M20 40 C 30 10, 90 5, 120 22 C 150 8, 205 15, 200 40 C 195 62, 140 68, 100 58 C 60 70, 15 62, 20 40 Z" fill="rgba(240,205,60,.55)"/></svg><span>he pissed here</span></div>
     </div>
   </div>
 
   <section id="bench">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head rv">
         <h2>Benchmarks.</h2>
         <p class="sub">Independently evaluated by a guy who watched him for ten minutes.</p>
       </div>
       <table class="table">
         <thead><tr><th>Task</th><th>Super Intelligence</th><th>Stupid Intelligence</th></tr></thead>
         <tbody>
-          <tr><td>Math</td><td class="ok">Passes</td><td class="si">"ball"<small>answer given to every question</small></td></tr>
-          <tr><td>Reasoning</td><td class="ok">Passes</td><td class="si">Drooled<small>test paper unreadable</small></td></tr>
-          <tr><td>Chess</td><td class="ok">Grandmaster</td><td class="si">Ate the knight<small>then the bishop</small></td></tr>
-          <tr><td>Reading</td><td class="ok">Every language</td><td class="si">Stared at the page<small>upside down, for an hour</small></td></tr>
-          <tr><td>Memory</td><td class="ok">Everything</td><td class="si">4 seconds<small>forgot the test mid test</small></td></tr>
-          <tr><td>Flying</td><td class="ok">Yes, with cape</td><td class="si">Fell off the couch<small>twice</small></td></tr>
-          <tr><td>Being a good boy</td><td class="si">Unknown</td><td class="ok">Yes<small>the only one he passes</small></td></tr>
+          <tr class="rv"><td>Math</td><td class="ok">Passes</td><td class="si"><span class="t">"ball"</span><small>answer given to every question</small></td></tr>
+          <tr class="rv"><td>Reasoning</td><td class="ok">Passes</td><td class="si"><span class="t">Drooled</span><small>test paper unreadable</small></td></tr>
+          <tr class="rv"><td>Chess</td><td class="ok">Grandmaster</td><td class="si"><span class="t">Ate the knight</span><small>then the bishop</small></td></tr>
+          <tr class="rv"><td>Reading</td><td class="ok">Every language</td><td class="si"><span class="t">Stared at the page</span><small>upside down, for an hour</small></td></tr>
+          <tr class="rv"><td>Memory</td><td class="ok">Everything</td><td class="si"><span class="t">4 seconds</span><small>forgot the test mid test</small></td></tr>
+          <tr class="rv"><td>Flying</td><td class="ok">Yes, with cape</td><td class="si"><span class="t">Fell off the couch</span><small>twice</small></td></tr>
+          <tr class="rv"><td>Being a good boy</td><td class="si"><span class="t">Unknown</span></td><td class="ok">Yes<small>the only one he passes</small></td></tr>
         </tbody>
       </table>
     </div>
@@ -246,22 +287,22 @@
 
   <section id="model">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head rv">
         <h2>Model <em>card.</em></h2>
         <p class="sub">Published for transparency. He asked us not to.</p>
       </div>
       <div class="cards">
-        <div class="card"><div class="l">Parameters</div><div class="v">3</div><div class="d">food, ball, ???</div></div>
-        <div class="card"><div class="l">Context window</div><div class="v">4 s</div><div class="d">then he forgets what you said and why he's here</div></div>
-        <div class="card"><div class="l">Training data</div><div class="v">1 ball</div><div class="d">it rolled under the couch in 2019. he's still thinking about it</div></div>
-        <div class="card"><div class="l">Safety</div><div class="v">Drools</div><div class="d">on the keyboard, the floor, you. he has never hurt anyone. he can't reach</div></div>
+        <div class="card rv"><div class="l">Parameters</div><div class="v">3</div><div class="d">food, ball, ???</div></div>
+        <div class="card rv"><div class="l">Context window</div><div class="v">4 s</div><div class="d">then he forgets what you said and why he's here</div></div>
+        <div class="card rv"><div class="l">Training data</div><div class="v">1 ball</div><div class="d">it rolled under the couch in 2019. he's still thinking about it</div></div>
+        <div class="card rv"><div class="l">Safety</div><div class="v">Drools</div><div class="d">on the keyboard, the floor, you. he has never hurt anyone. he can't reach</div></div>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="band">
+      <div class="band rv">
         <div>
           <div class="q">"We will be officially banning the term. From now on it is SI."<br><span style="opacity:.7">He heard that and thought they meant him.</span></div>
           <div class="who">Stupid Inu · the little brother · $SI</div>
@@ -284,6 +325,8 @@
     <img data-pose="point" src="assets/dog-point.webp" alt="">
     <img data-pose="finger" src="assets/dog-finger.webp" alt="">
     <img data-pose="guilty" src="assets/dog-guilty.webp" alt="">
+    <img data-pose="stride" src="assets/dog-stride.webp" alt="">
+    <img data-pose="scream" src="assets/dog-scream.webp" alt="">
   </div>
   <div class="sweat">💦</div><div class="zz">z</div><div class="cens">CENSORED</div>
 </div>
@@ -331,32 +374,51 @@
   })();
 
 
+
+  // reveals + the IQ counting down + the red cells typing in
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return; const el = e.target; io.unobserve(el);
+    const sib = [...el.parentElement.children].filter((c) => c.classList.contains('rv')); el.style.transitionDelay = (sib.indexOf(el) * 70) + 'ms'; el.classList.add('in');
+    el.querySelectorAll('.si .t').forEach((t, i) => { const full = t.textContent; if (t.dataset.done) return; t.dataset.done = 1; t.textContent = ''; let k = 0; setTimeout(() => { const iv = setInterval(() => { t.textContent = full.slice(0, ++k); if (k >= full.length) clearInterval(iv); }, 38); }, 250 + i * 60); });
+  }), { threshold: 0.15 });
+  document.querySelectorAll('.rv').forEach((el) => io.observe(el));
+  (function iq() { const el = $('#iq'); const t1 = performance.now(), D = 1700; (function f(now) { const k = Math.min(1, (now - t1) / D), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(160 - 157 * e); if (k < 1) requestAnimationFrame(f); else { el.textContent = '3'; el.style.color = 'var(--red)'; } })(t1); })();
+
   // ---- the pet: he walks around the page and is an asshole ----
   const pet = $('#pet'), say = $('#say'), stageDog = $('#dog');
   const poses = [...pet.querySelectorAll('img')];
   const pose = (n) => poses.forEach((i) => i.classList.toggle('on', i.dataset.pose === n));
-  const W = () => innerWidth, PW = () => pet.offsetWidth;
-  const P = { x: 0, y: 0, tx: 0, dir: -1, state: 'idle', until: 0, sayT: 0, mouse: { x: -999, y: -999 }, lastMouse: 0, annoyed: 0 };
+  const W = () => innerWidth, PW = () => pet.offsetWidth, PH = () => pet.offsetHeight;
+  const touch = matchMedia('(hover: none)').matches;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const P = { x: 0, y: 0, vy: 0, s: 1, lean: 0, tx: 0, dir: 1, state: 'idle', until: 0, sayT: 0, mouse: { x: -999, y: -999 }, lastMouse: 0, annoyed: 0, frame: 0, frameT: 0 };
   const LINES = {
-    walk: ['i\'m walking here', 'dont scroll. i\'m working', 'where is the ball', 'i live here now', 'this page is mine', 'brb', 'looking for the ca', 'my brother has a website too. its worse'],
-    stare: ['what', 'what are you looking at', 'you sold didnt you', 'i can see your wallet', 'blink and i bite'],
+    walk: ['i\'m walking here', 'dont scroll. i\'m working', 'where is the ball', 'i live here now', 'this page is mine', 'brb', 'looking for the ca', 'my brother has a website too. its worse', 'left right left right'],
+    stare: ['what', 'what are you looking at', 'you sold didnt you', 'i can see your wallet', 'blink and i bite', 'i know your seed phrase. its "ball"'],
     point: ['you.', 'you. yes you.', 'i know what you did', 'you sold the dip', 'you\'re the jeet', 'you have 0.04 sol. i can smell it', 'sir this is a government page', 'YOU.', 'paper hands. i can tell', 'you clicked buy and then cried'],
     finger: ['fuck off', 'fuck off i\'m official', 'go buy something', 'my brother does meetings. i do this', 'i\'d say hi but no', 'this one is for the devs', 'certified by the government'],
     jerk: ['shh. busy.', 'dont look', '5 more minutes', 'i\'m thinking', 'its for the benchmarks', 'this is my job now', 'reading the whitepaper', 'computing'],
-    caught: ['FUCK OFF', 'I SAID FUCK OFF', 'DONT TOUCH ME', 'GET OUT', 'I\'M WORKING'],
-    sleep: ['zzz', 'z', 'ball…'],
-    click: ['fuck off', 'ow', 'dont', 'FUCK OFF', 'i\'m telling my brother', 'no touching the intelligence'],
-    scroll: ['wait', 'slow down', 'i get carsick', 'WAIT'],
+    caught: ['FUCK OFF', 'I SAID FUCK OFF', 'DONT TOUCH ME', 'GET OUT', 'I\'M WORKING', 'KNOCK FIRST'],
+    sleep: ['z', 'zz', 'zzz', 'ball…', 'zzz'],
+    click: ['fuck off', 'ow', 'dont', 'FUCK OFF', 'i\'m telling my brother', 'no touching the intelligence', 'HEY'],
+    scroll: ['WAIT', 'i get carsick', 'STOP', 'slow down', 'WHO IS DRIVING'],
+    land: ['ow.', 'i meant to do that', 'floor.', 'ok.'],
   };
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
-  const speak = (t, big) => { say.textContent = t; say.classList.toggle('big', !!big); say.classList.add('on'); clearTimeout(P.sayT); P.sayT = setTimeout(() => say.classList.remove('on'), big ? 1400 : 2000); };
-  const placeSay = () => { say.style.left = (P.x + PW() / 2) + 'px'; say.style.top = (innerHeight - pet.offsetHeight + 6) + 'px'; };
+  const speak = (t, big) => {
+    say.textContent = t; say.classList.remove('on', 'big'); void say.offsetWidth;   // restart the pop
+    say.classList.add('on'); if (big) say.classList.add('big');
+    clearTimeout(P.sayT); P.sayT = setTimeout(() => say.classList.remove('on'), big ? 1500 : 2100);
+  };
+  const placeSay = () => { const hw = say.offsetWidth / 2 + 8; say.style.left = Math.max(hw, Math.min(W() - hw, P.x + PW() / 2 + (P.state === 'sleep' ? P.dir * PW() * .3 : 0))) + 'px'; say.style.top = (innerHeight - P.y - PH() * P.s * (P.state === 'sleep' ? .45 : 1) + 8) + 'px'; };
   const face = (dir) => { P.dir = dir; pet.classList.toggle('flip', dir < 0); };   // images face right by default; flip to face left
-  const faceMouse = () => face(P.mouse.x > P.x + PW() / 2 ? 1 : -1);
+  const faceMouse = () => face((touch ? W() / 2 : P.mouse.x) > P.x + PW() / 2 ? 1 : -1);
+  const STAND = { stare: 1, point: 1, finger: 1 };
   const setState = (st, ms) => {
     P.state = st; P.until = performance.now() + ms;
-    pet.className = (P.dir < 0 ? 'flip ' : '') + ({ walk: 'walk', jerk: 'jerk', caught: 'shake', sleep: 'sleep' }[st] || '');
-    pose({ point: 'point', finger: 'finger', jerk: 'guilty', caught: 'finger' }[st] || 'idle');
+    pet.className = (P.dir < 0 ? 'flip ' : '') + ({ walk: 'walk', jerk: 'jerk', caught: 'shake', sleep: 'sleep', tumble: 'tumble' }[st] || (STAND[st] ? 'stand' : ''));
+    pose({ point: 'point', finger: 'finger', jerk: 'guilty', caught: 'scream', tumble: 'scream' }[st] || 'idle');
+    if (st !== 'walk') P.speed = 0;
   };
   function decide() {
     const r = Math.random();
@@ -366,56 +428,90 @@
     else if (r < 0.66) { faceMouse(); setState('point', 2200 + Math.random() * 1200); speak(pick(LINES.point)); }
     else if (r < 0.80) { faceMouse(); setState('finger', 2000 + Math.random() * 1200); speak(pick(LINES.finger)); }
     else if (r < 0.93) { face(P.x < W() / 2 ? -1 : 1); setState('jerk', 3500 + Math.random() * 3000); speak(pick(LINES.jerk)); }
-    else { setState('sleep', 4000 + Math.random() * 4000); speak(pick(LINES.sleep)); }
+    else { setState('sleep', 4500 + Math.random() * 4000); P.snore = 0; }
   }
-  // boot: he is in the stage; after a beat he "leaves" and the wandering begins
+  // boot: he is in the stage; after a beat he jumps off the card and the wandering begins
   let petOn = false;
   function release() {
     if (petOn) return; petOn = true;
     const r = stageDog.getBoundingClientRect();
-    stageDog.style.visibility = 'hidden'; $('#drool').style.visibility = 'hidden'; $('#t4').hidden = true; $('#left').hidden = false; setTimeout(() => { $('#puddle').hidden = false; }, 1500);
-    P.x = Math.min(Math.max(0, r.left + r.width / 2 - PW() / 2), W() - PW()); pet.style.display = 'block';
-    face(-1); setState('stare', 900); speak('bye.');
-    setTimeout(() => { P.tx = Math.max(0, P.x - 300 - Math.random() * 300); face(-1); setState('walk', 1e9); }, 900);
+    stageDog.style.visibility = 'hidden'; $('#drool').style.visibility = 'hidden'; $('#t4').hidden = true;
+    setTimeout(() => { $('#puddle').hidden = false; }, 900);
+    setTimeout(() => { $('#poster').hidden = false; }, 2200);
+    pet.style.display = 'block';
+    const onScreen = r.bottom > 0 && r.top < innerHeight && r.width > 0;
+    if (onScreen && !reduced) {
+      // start exactly where the stage dog stands, same size, then jump
+      P.s = Math.min(3, r.height / PH()); P.x = r.left + r.width / 2 - PW() / 2; P.y = Math.max(0, innerHeight - r.bottom);
+      face(-1); setState('stare', 650); speak('bye.');
+      setTimeout(() => { P.vy = 560; P.jumpFrom = P.y; setState('fall', 1e9); pose('scream'); }, 650);
+    } else {
+      P.s = 1; P.x = W() + 10; P.y = 0; P.tx = W() - PW() - 60; face(-1); setState('walk', 1e9);
+    }
   }
   pet.style.display = 'none';
   setTimeout(release, 2600);
   // reactions
   addEventListener('pointermove', (e) => { P.mouse = { x: e.clientX, y: e.clientY }; P.lastMouse = performance.now(); });
+  const caught = () => { setState('caught', 1300); speak(pick(LINES.caught), true); };
   pet.addEventListener('pointerdown', (e) => {
     e.preventDefault(); P.annoyed++;
-    speak(pick(LINES.click), P.annoyed > 2); faceMouse();
-    if (P.state === 'jerk') { setState('caught', 1200); speak(pick(LINES.caught), true); return; }
+    P.mouse = { x: e.clientX, y: e.clientY }; faceMouse();
+    if (P.state === 'jerk' || P.state === 'sleep') return caught();
+    if (P.state === 'fall') return;
+    if (P.annoyed > 2 && Math.random() < .5) return caught();
+    speak(pick(LINES.click));
     // run away from the cursor
-    const away = (P.mouse.x > P.x + PW() / 2) ? -1 : 1; P.tx = Math.max(0, Math.min(W() - PW(), P.x + away * (260 + Math.random() * 260)));
-    face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); P.speed = 6;
+    const away = (e.clientX > P.x + PW() / 2) ? -1 : 1; P.tx = Math.max(0, Math.min(W() - PW(), P.x + away * (260 + Math.random() * 260)));
+    face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); P.speed = 6.5;
   });
-  let lastY = scrollY, scrollT;
-  addEventListener('scroll', () => { const dy = scrollY - lastY; lastY = scrollY; if (Math.abs(dy) > 40 && P.state !== 'walk') { clearTimeout(scrollT); scrollT = setTimeout(() => { if (Math.random() < .5) speak(pick(LINES.scroll)); }, 120); } }, { passive: true });
+  if (touch) addEventListener('pointerdown', (e) => { if (P.state === 'jerk' && Math.abs(e.clientX - (P.x + PW() / 2)) < 170 && innerHeight - e.clientY < PH() + 160) caught(); }, { passive: true });
+  let lastY = scrollY, lastScrollT = performance.now();
+  addEventListener('scroll', () => {
+    const now = performance.now(), dy = scrollY - lastY, v = Math.abs(dy) / Math.max(16, now - lastScrollT); lastY = scrollY; lastScrollT = now;
+    if (!petOn || P.state === 'fall') return;
+    if (v > 2.2 && P.state !== 'tumble' && now - (P.lastTumble || 0) > 4000 && !reduced) { P.lastTumble = now; setState('tumble', 900); speak(pick(LINES.scroll), true); }
+  }, { passive: true });
   // loop
   let lastT = performance.now();
   (function tick(now) {
     requestAnimationFrame(tick);
     const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
     if (!petOn) return;
-    const near = Math.hypot(P.mouse.x - (P.x + PW() / 2), P.mouse.y - (innerHeight - pet.offsetHeight / 2)) < 170 && now - P.lastMouse < 2500;
-    if (P.state === 'jerk' && near) { setState('caught', 1300); speak(pick(LINES.caught), true); }
+    const mx = touch ? W() / 2 : P.mouse.x;
+    const near = !touch && Math.hypot(P.mouse.x - (P.x + PW() / 2), P.mouse.y - (innerHeight - PH() / 2)) < 170 && now - P.lastMouse < 2500;
+    if (P.state === 'jerk' && near) caught();
     if (P.state === 'walk' && near && !P.leave && Math.random() < 0.012 && now - (P.lastFlip || 0) > 5000) { P.lastFlip = now; const tx = P.tx; faceMouse(); setState('finger', 1100); speak('fuck off'); P.resume = tx; }
-    if (P.state === 'walk') {
+    if (P.state === 'fall') {
+      // jump off the card: up, then gravity; shrink to pet size on the way down
+      P.vy -= 1900 * dt; P.y += P.vy * dt; P.x += (P.dir * 90) * dt;
+      P.s += (1 - P.s) * Math.min(1, dt * 3.5);
+      if (P.y <= 0) { P.y = 0; P.s = 1; P.vy = 0; setState('land', 420); pet.classList.add('squash'); speak(pick(LINES.land)); setTimeout(() => pet.classList.remove('squash'), 420); }
+    } else if (P.state === 'walk') {
       const sp = (P.speed || 2.6) * 60 * dt;
+      P.frameT += dt; if (P.frameT > (P.speed ? 0.09 : 0.16)) { P.frameT = 0; P.frame ^= 1; pose(P.frame ? 'stride' : 'idle'); }
       if (Math.abs(P.tx - P.x) <= sp) {
         P.x = P.tx; P.speed = 0;
-        if (P.leave) { P.leave = false; const fromLeft = P.x < 0; P.x = fromLeft ? W() + 10 : -PW() - 10; P.tx = fromLeft ? W() - PW() - 40 : 40; face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); setTimeout(() => speak(pick(['back', 'i was outside', 'i forgot what i was doing'])), 1200); }
+        if (P.leave) { P.leave = false; const fromLeft = P.x < 0; P.x = fromLeft ? W() + 10 : -PW() - 10; P.tx = fromLeft ? W() - PW() - 40 : 40; face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); setTimeout(() => speak(pick(['back', 'i was outside', 'i forgot what i was doing', 'nobody out there either'])), 1200); }
         else decide();
       }
       else P.x += Math.sign(P.tx - P.x) * sp;
-    } else if (now > P.until) { if (P.resume != null) { P.tx = P.resume; P.resume = null; face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); } else decide(); }
-    if (P.state === 'stare' || P.state === 'point' || P.state === 'finger') { faceMouse(); }
-    if (!P.leave && !(P.state === 'walk' && (P.x < 0 || P.x > W() - PW()))) P.x = Math.max(0, Math.min(W() - PW(), P.x));
-    pet.style.transform = `translateX(${P.x}px)`;
+    } else if (now > P.until) {
+      if (P.resume != null) { P.tx = P.resume; P.resume = null; face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); }
+      else if (P.state === 'land') { P.tx = Math.max(0, Math.min(W() - PW(), P.x + P.dir * (260 + Math.random() * 300))); face(P.tx > P.x ? 1 : -1); setState('walk', 1e9); }
+      else decide();
+    }
+    if (P.state === 'sleep' && now - (P.snoreT || 0) > 900) { P.snoreT = now; speak(LINES.sleep[P.snore++ % LINES.sleep.length]); }
+    if (STAND[P.state]) faceMouse();
+    // lean toward the cursor when he's looking at you
+    const wantLean = STAND[P.state] && !touch ? Math.max(-7, Math.min(7, (mx - (P.x + PW() / 2)) / 60)) : 0;
+    P.lean += (wantLean - P.lean) * Math.min(1, dt * 8);
+    if (!P.leave && P.state !== 'fall' && !(P.state === 'walk' && (P.x < 0 || P.x > W() - PW()))) P.x = Math.max(0, Math.min(W() - PW(), P.x));
+    pet.style.transform = `translate(${P.x}px, ${-P.y}px) scale(${P.s}) rotate(${P.lean}deg)`;
     placeSay();
   })(performance.now());
   addEventListener('resize', () => { P.x = Math.min(P.x, W() - PW()); });
+  window.__pet = { force: (st) => { if (!petOn) release(); const ms = 9e5; if (st === 'jerk') { face(-1); } else faceMouse(); setState(st, ms); speak(pick(LINES[st] || LINES.stare), st === 'caught' || st === 'tumble'); }, P };
 })();
 </script>
 </body>
