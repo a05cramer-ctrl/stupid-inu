@@ -5,7 +5,7 @@ window.SI_CFG = {
   CHAIN: "solana",
   PAD: "pump.fun",
   PAIR: "",
-  X: "",
+  X: "https://x.com/stupidintelinu",
   BUY: "",
   CHART: ""
 };
